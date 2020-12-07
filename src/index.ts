@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 import { ApolloServer } from "apollo-server-express";
-import * as Express from "express";
+import Express from "express";
 import { buildSchema } from 'type-graphql'
 import { createConnection } from 'typeorm';
 import { RegisterResolver } from './modules/user/Register';
+import {  } from "type-graphql";
 
 const main = async () => {
     await createConnection();
