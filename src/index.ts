@@ -15,6 +15,19 @@ const main = async () => {
     await createConnection();
     const schema = await buildSchema({
         resolvers: [MeResolver, RegisterResolver, LoginResolver],
+        authChecker:
+        ( { context: { req } }) => {
+        // here we can read the user from context
+        // and check his permission in the db against the `roles` argument
+        // that comes from the `@Authorized` decorator, eg. ["ADMIN", "MODERATOR"]
+
+    // if (req.session.userId) {
+    //     return true;
+    // }
+
+    //     return true; // or false if access is denied
+    return !!req.session.userId;
+        }
       });
 
       const apolloServer = new ApolloServer({
