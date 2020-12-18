@@ -10,11 +10,16 @@ import { redis } from './redis';
 import cors from 'cors';
 import { LoginResolver } from './modules/user/Login';
 import { MeResolver } from './modules/user/Me';
+import { ConfirmUserResolver } from './modules/user/ConfirmUser';
+import { ForgotPasswordResolver } from './modules/user/ForgotPassword';
+import { ChnagePasswordResolver } from './modules/user/ChangePassword';
+import { LogoutResolver } from './modules/user/Logout';
 
 const main = async () => {
     await createConnection();
     const schema = await buildSchema({
-        resolvers: [MeResolver, RegisterResolver, LoginResolver],
+        resolvers: [MeResolver, RegisterResolver, LoginResolver, ConfirmUserResolver, ForgotPasswordResolver, ChnagePasswordResolver, LogoutResolver],
+        //resolvers: [__dirname + '/modules/**/*.ts'],
         authChecker:
         ( { context: { req } }) => {
         // here we can read the user from context
@@ -32,7 +37,7 @@ const main = async () => {
 
       const apolloServer = new ApolloServer({
           schema,
-          context: ({ req }: any) => ({ req })
+          context: ({ req, res}: any) => ({ req, res })
     });
 
       const app = Express();
