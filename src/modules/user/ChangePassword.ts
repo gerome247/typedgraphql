@@ -8,7 +8,7 @@ import { forgotPasswordPrefix } from "../constants/redisPrefixes";
 import { MyContext } from "../../types/MyContext";
 
 @Resolver()
-export class ChnagePasswordResolver {
+export class ChangePasswordResolver {
   @Mutation(() => User, { nullable: true})
   async ChangePassword(
     @Arg("data") { token, password }:
