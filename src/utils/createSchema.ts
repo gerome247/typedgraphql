@@ -1,3 +1,4 @@
+import { CreateUserResolver } from "../modules/user/CreateUser";
 import { buildSchema } from "type-graphql";
 import { ChangePasswordResolver } from "../modules/user/ChangePassword";
 import { ConfirmUserResolver } from "../modules/user/ConfirmUser";
@@ -9,7 +10,16 @@ import { RegisterResolver } from "../modules/user/Register";
 
 export const createSchema = () =>
     buildSchema({
-        resolvers: [MeResolver, RegisterResolver, LoginResolver, ConfirmUserResolver, ForgotPasswordResolver, ChangePasswordResolver, LogoutResolver],
+        resolvers: [
+            MeResolver,
+            RegisterResolver,
+            LoginResolver,
+            ConfirmUserResolver,
+            ForgotPasswordResolver,
+            ChangePasswordResolver,
+            LogoutResolver,
+            CreateUserResolver
+        ],
         //resolvers: [__dirname + '/modules/**/*.ts'],
         authChecker:( { context: { req } }) => {
             return !!req.session.userId;
